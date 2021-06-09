@@ -2,8 +2,7 @@
 #define SP_CORE_HPP
 
 
-#include "precision.h"
-#include "Vector3.h"
-#include "Matrix3.h"
+#include "spear/spear_math.hpp"
+
 
 #endif // !SP_CORE_HPP

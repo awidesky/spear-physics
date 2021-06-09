@@ -2,7 +2,7 @@
 #define SP_MATRIX4_HPP
 
 
-#include "core.h"
+#include "core.hpp"
 #include <iostream>
 
 
@@ -28,7 +28,7 @@ namespace spear {
 		Matrix3() : data{ {(real)1, (real)0, (real)0}, {(real)0, (real)1, (real)0}, {(real)0, (real)0, (real)1} } {};
 
 		/** Constructor creates a matrix with given array data. */
-		Matrix3(const real _data[3][3]) {
+		Matrix3(const real (&_data)[3][3]) {
 			for(int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
 					data[i][j] = _data[i][j];
@@ -37,7 +37,7 @@ namespace spear {
 		};
 
 		/** Constructor creates a matrix with given initializer_list. */
-		Matrix3(const std::initializer_list<std::initializer_list<real>> list) {
+		Matrix3(const std::initializer_list<std::initializer_list<real>>& list) {
 			/* https://stackoverflow.com/questions/48243044/how-do-i-initialize-with-a-2-dimensional-initializer-list */
 			auto it = list.begin();         // iterate through outer list 
 			for (int i = 0; i < 3; i++, it++) {
@@ -48,11 +48,6 @@ namespace spear {
 		/** The default constructor creates (given value) * (identical matrix). */
 		Matrix3(const real value) : data { {value, (real)0, (real)0}, { (real)0, value, (real)0 }, { (real)0, (real)0, value } } {};
 
-		/** Copy constructor */
-		Matrix3(const Matrix3& mat) {
-			Matrix3(mat.data);
-		}
-
 		/** Constructor creates matrix with given column vector */
 		Matrix3(const Vector3& a, const Vector3& b, const Vector3& c) {
 			data[0][0] = a.x; data[0][1] = b.x; data[0][2] = c.x;
@@ -61,6 +56,11 @@ namespace spear {
 		}
 
 
+		/** Copy constructor */
+		Matrix3(const Matrix3& mat) {
+			Matrix3(mat.data);
+		}
+		/** Copy assingment */
 		Matrix3& operator= (const Matrix3& m) {
 			for (int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
@@ -69,6 +69,11 @@ namespace spear {
 			}
 			return *this;
 		}
+
+		/** move constructor */
+		Matrix3(Matrix3&& mat) noexcept = default;
+		/** move assingment */
+		Matrix3& operator= (Matrix3&& mat) noexcept = default;
 
 		const real* operator[](int index) const {
 			return data[index];
@@ -98,24 +103,59 @@ namespace spear {
 			return result;
 		}
 
-		const Matrix3 operator*= (Matrix3& mat) {
+		Matrix3& operator*= (Matrix3& mat) {
 
 			*this = *this * mat;
+			return *this;
+		}
+
+		Matrix3 operator+ (Matrix3& mat) {
+			Matrix3 result{ 0 };
+
+			for (int i = 0; i < 3; i++) 
+				for (int j = 0; j < 3; j++) 
+					result[i][j] = data[i][j] + mat[i][j];
+
+			return result;
+		}
+
+		Matrix3& operator+= (Matrix3& mat) {
+			for (int i = 0; i < 3; i++)
+				for (int j = 0; j < 3; j++)
+					data[i][j] += mat[i][j];
+
+			return *this;
+		}
+
+		Matrix3& operator- (Matrix3& mat) {
+			Matrix3 result{ 0 };
+
+			for (int i = 0; i < 3; i++)
+				for (int j = 0; j < 3; j++)
+					result[i][j] = data[i][j] - mat[i][j];
+
+			return result;
+		}
+
+		Matrix3& operator-= (Matrix3& mat) {
+			for (int i = 0; i < 3; i++)
+				for (int j = 0; j < 3; j++)
+					data[i][j] -= mat[i][j];
+
 			return *this;
 		}
 	};
 
 	std::ostream& operator<< (std::ostream& o, const Matrix3& mat) {
 
-		std::cout << mat[0][0] << " " << mat[0][1] << " " << mat[0][2] << "\n"
-			<< mat[1][0] << " " << mat[1][1] << " " << mat[1][2] << "\n"
-			<< mat[2][0] << " " << mat[2][1] << " " << mat[2][2] << "\n";
+		std::cout	<< mat[0][0] << " " << mat[0][1] << " " << mat[0][2] << "\n"
+					<< mat[1][0] << " " << mat[1][1] << " " << mat[1][2] << "\n"
+					<< mat[2][0] << " " << mat[2][1] << " " << mat[2][2] << "\n";
 
 		return o;
 	}
 
 
-	/*사칙연산*/
 }
 
 #endif // !SP_MATRIX4_HPP

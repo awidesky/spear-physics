@@ -1,13 +1,10 @@
-#ifndef SP_SPEAR_MATH_H
-#define SP_SPEAR_MATH_H
-
+#include "experimentMath.hpp"
 #include "spear_config.h"
-#include <math.h>
 
 namespace spear {
 
 #ifdef SP_EXPERIMENTAL_QUAKE_FASTINVSQRT
-	#include <stdint.h> 
+#include <stdint.h> 
 
 	float Q_invsqrt_f(const float number) /* https://en.wikipedia.org/wiki/Fast_inverse_square_root */
 	{
@@ -41,14 +38,6 @@ namespace spear {
 		return y;
 	}
 
-#	define sp_invsqrtf Q_invsqrt_f
-#	define sp_invsqrt Q_invsqrt
-#else
-	inline float invsqrt_f(const float x) { return 1.0F / sqrtf(x); }
-	inline double invsqrt(const double x) { return 1.0 / sqrt(x); }
-#	define sp_invsqrtf invsqrt_f
-#	define sp_invsqrt invsqrt
 #endif // SP_EXPERIMENTAL_QUAKE_FASTINVSQRT
-}
 
-#endif // SP_SPEAR_MATH_H
+}

@@ -27,7 +27,7 @@ namespace spear {
 		Vector3(const real a, const real b, const real c) : x(a), y(b), z(c) {}
 		/** Constructor creates vector with given vector */
 		Vector3(const Vector3& v) : x(v.x), y(v.y), z(v.x) {}
-		Vector3(Vector3&& v) noexcept : x(v.x), y(v.y), z(v.x) {}
+		Vector3(Vector3&& v) noexcept = default;
 
 		Vector3& operator= (const Vector3& v) {
 			x = v.x;
@@ -35,6 +35,7 @@ namespace spear {
 			z = v.z;
 			return *this;
 		}
+		Vector3& operator= (Vector3&& v) = default;
 
 		/** Adds given vector to this, scaled by given amount */
 		void addScaledVector(const Vector3& vector, const real scale) {
