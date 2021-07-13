@@ -5,10 +5,13 @@ project(spear VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-option(SP_SINGLE_PRECISION "use single-precision floating point. If OFF, use double-precision floating point" OFF)
+set(SP_REAL_PRECISION "double_8" CACHE STRING "Choose floating point precision")
+set_property(CACHE SP_REAL_PRECISION PROPERTY STRINGS "double_8" "float_4")
 
-message("options starting with SP_EXPERIMENTAL is for experiment or testing, not for practice use")
-option(SP_EXPERIMENTAL_QUAKE_FASTINVSQRT "use inhanced version of Fast inverse square root (aka 0x5F3759DF)" OFF)
+option(SP_FPMATH_OPTIMIZATION "use floating point math optimization(might lose some accuracy)" OFF)
+cmake_dependent_option(SP_USE_QUAKE_FASTINVSQRT "use inhanced version of Fast inverse square root (aka 0x5F3759DF)" ON "SP_FPMATH_OPTIMIZATION" OFF)
+
+
 
 configure_file(spear_config.h.in ${SPEAR_SOURCE_DIR}/src/spear_config.h)
 
@@ -20,6 +23,8 @@ set(SRCFILES
 	src/spear_config.h
 
 	src/Matrix3.hpp
+	src/MatAccumProxy.hpp
+	src/MatAccumProxy.cpp
 	src/Matrix4.hpp
 	src/Vector3.hpp
 	src/Vector4.hpp

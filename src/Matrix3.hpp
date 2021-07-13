@@ -77,6 +77,13 @@ namespace spear {
 		real* operator[](int index) {
 			return data[index];
 		}
+		
+		
+
+   MatrixAccumProxy operator+(Matrix3& oth){
+    return MatrixAccumProxy(*this, oth);
+    
+  }
 
 		Vector3 operator* (Vector3& v) const {
 			
@@ -115,7 +122,7 @@ namespace spear {
 	}
 
 
-	/*»çÄ¢¿¬»ê*/
+	/*ï¿½Ä¢ï¿½*/
 }
 
 #endif // !SP_MATRIX4_HPP

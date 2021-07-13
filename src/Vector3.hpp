@@ -53,6 +53,13 @@ namespace spear {
 			z = -z;
 
 		}
+		
+		/** Clear all component to zero */
+		void clear() {
+		  x = 0;
+		  y = 0;
+		  z = 0;
+		}
 
 		real magnitude() const { return real_sqrt(x * x + y * y + z * z); }
 		real squaredMagnitude() const { return x * x + y * y + z * z; }

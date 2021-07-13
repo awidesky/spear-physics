@@ -8,12 +8,12 @@
 
 namespace spear {
 
-#ifdef PS_SINGLE_PRECISION
+#if SP_REAL_PRECISION == "float_4"
 	typedef float real;
 #	define real_sqrt sqrtf
 #	define real_inverse_sqrt sp_invsqrtf
 
-#else
+#elif SP_REAL_PRECISION == "double_8"
 	typedef double real;
 #	define real_sqrt sqrt
 #	define real_inverse_sqrt sp_invsqrt
