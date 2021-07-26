@@ -64,7 +64,7 @@ namespace spear {
 		Matrix3& operator= (const Matrix3& m) {
 			for (int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
-					data[i][j] = m[i][j];
+					data[i][j] = m.data[i][j];
 				}
 			}
 			return *this;
@@ -98,7 +98,7 @@ namespace spear {
 			for (int i = 0; i < 3; i++)
 				for (int j = 0; j < 3; j++)
 					for (int k = 0; k < 3; k++)
-						result[i][j] += data[i][k] * mat.data[k][j];
+						result[i][k] += data[i][j] * mat.data[j][k];
 
 			return result;
 		}
@@ -114,7 +114,7 @@ namespace spear {
 
 			for (int i = 0; i < 3; i++) 
 				for (int j = 0; j < 3; j++) 
-					result[i][j] = data[i][j] + mat[i][j];
+					result[i][j] = data[i][j] + mat.data[i][j];
 
 			return result;
 		}
@@ -122,7 +122,7 @@ namespace spear {
 		Matrix3& operator+= (Matrix3& mat) {
 			for (int i = 0; i < 3; i++)
 				for (int j = 0; j < 3; j++)
-					data[i][j] += mat[i][j];
+					data[i][j] += mat.data[i][j];
 
 			return *this;
 		}
@@ -132,7 +132,7 @@ namespace spear {
 
 			for (int i = 0; i < 3; i++)
 				for (int j = 0; j < 3; j++)
-					result[i][j] = data[i][j] - mat[i][j];
+					result[i][j] = data[i][j] - mat.data[i][j];
 
 			return result;
 		}
@@ -140,7 +140,7 @@ namespace spear {
 		Matrix3& operator-= (Matrix3& mat) {
 			for (int i = 0; i < 3; i++)
 				for (int j = 0; j < 3; j++)
-					data[i][j] -= mat[i][j];
+					data[i][j] -= mat.data[i][j];
 
 			return *this;
 		}
