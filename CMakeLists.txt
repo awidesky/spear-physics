@@ -9,7 +9,7 @@ set(SP_REAL_PRECISION "double_8" CACHE STRING "Choose floating point precision")
 set_property(CACHE SP_REAL_PRECISION PROPERTY STRINGS "double_8" "float_4")
 
 option(SP_FPMATH_OPTIMIZATION "use floating point math optimization(might lose some accuracy)" OFF)
-cmake_dependent_option(SP_USE_QUAKE_FASTINVSQRT "use inhanced version of Fast inverse square root (aka 0x5F3759DF)" ON "SP_FPMATH_OPTIMIZATION" OFF)
+option(SP_USE_QUAKE_FASTINVSQRT "use inhanced version of Fast inverse square root (aka 0x5F3759DF)" ON "SP_FPMATH_OPTIMIZATION" OFF)
 
 
 
