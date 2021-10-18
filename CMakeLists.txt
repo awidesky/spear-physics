@@ -11,8 +11,9 @@ set(SP_REAL_PRECISION "double_8" CACHE STRING "Choose floating point precision")
 set_property(CACHE SP_REAL_PRECISION PROPERTY STRINGS "double_8" "float_4")
 
 option(SP_FPMATH_OPTIMIZATION "use floating point math optimization(might lose some accuracy)" OFF)
-cmake_dependent_option(SP_USE_QUAKE_FASTINVSQRT "use inhanced version of Fast inverse square root (aka 0x5F3759DF)" ON "SP_FPMATH_OPTIMIZATION" OFF)
 
+message("options starting with SP_EXPERIMENTAL is for experiment or testing, not for practice use!")
+cmake_dependent_option(SP_USE_QUAKE_FASTINVSQRT "use inhanced version of Fast inverse square root (aka 0x5F3759DF)" ON "SP_FPMATH_OPTIMIZATION" OFF)
 
 
 configure_file(spear_config.h.in ${SPEAR_SOURCE_DIR}/src/spear_config.h)
@@ -24,17 +25,23 @@ set(SRCFILES
 	src/precision.h
 	src/spear_config.h
 
+	src/experimentMath.hpp
+	src/experimentMath.cpp
+ 
 	src/Matrix3.hpp
 	src/MatAccumProxy.hpp
 	src/MatAccumProxy.cpp
 	src/Matrix4.hpp
 	src/Vector3.hpp
 	src/Vector4.hpp
+
+	src/particle.hpp
+	src/particle.cpp
 )
 
 set(HEADERS
 	include/spear/spear.hpp
-	include/spear/spear_math.h
+	include/spear/spear_math.hpp
 )
 
 add_library(spear ${SRCFILES} ${HEADERS})
