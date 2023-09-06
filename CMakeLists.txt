@@ -15,7 +15,7 @@ option(SP_FPMATH_OPTIMIZATION "use floating point math optimization(might lose s
 cmake_dependent_option(SP_USE_QUAKE_FASTINVSQRT "use inhanced version of Fast inverse square root (aka 0x5F3759DF)" ON "SP_FPMATH_OPTIMIZATION" OFF)
 
 
-configure_file(spear_config.h.in ${PROJECT_SOURCE_DIR}/spear_config.h)
+configure_file(spear_config.h.in ${PROJECT_SOURCE_DIR}/src/spear_config.h)
 
 
 set(SRCFILES
