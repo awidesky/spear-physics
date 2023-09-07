@@ -7,10 +7,6 @@
 
 namespace spear {
 
-<<<<<<< HEAD
-#if SP_REAL_PRECISION == "float_4"
-=======
-
 #ifdef SP_EXPERIMENTAL_QUAKE_FASTINVSQRT
 #	define sp_invsqrtf Q_invsqrt_f
 #	define sp_invsqrt Q_invsqrt
@@ -21,13 +17,11 @@ namespace spear {
 #	define sp_invsqrt invsqrt
 #endif // SP_EXPERIMENTAL_QUAKE_FASTINVSQRT
 
-#ifdef PS_SINGLE_PRECISION
->>>>>>> dev
+#if SP_REAL_PRECISION == float_4
 	typedef float real;
 #	define real_sqrt sqrtf
 #	define real_inverse_sqrt sp_invsqrtf
-
-#elif SP_REAL_PRECISION == "double_8"
+#elif SP_REAL_PRECISION == double_8
 	typedef double real;
 #	define real_sqrt sqrt
 #	define real_inverse_sqrt sp_invsqrt

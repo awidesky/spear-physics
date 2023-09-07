@@ -12,11 +12,10 @@ set_property(CACHE SP_REAL_PRECISION PROPERTY STRINGS "double_8" "float_4")
 
 option(SP_FPMATH_OPTIMIZATION "use floating point math optimization(might lose some accuracy)" OFF)
 
-message("options starting with SP_EXPERIMENTAL is for experiment or testing, not for practice use!")
 cmake_dependent_option(SP_USE_QUAKE_FASTINVSQRT "use inhanced version of Fast inverse square root (aka 0x5F3759DF)" ON "SP_FPMATH_OPTIMIZATION" OFF)
 
 
-configure_file(spear_config.h.in ${SPEAR_SOURCE_DIR}/src/spear_config.h)
+configure_file(spear_config.h.in ${PROJECT_SOURCE_DIR}/src/spear_config.h)
 
 
 set(SRCFILES
